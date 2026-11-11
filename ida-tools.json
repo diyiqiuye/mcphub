@@ -1,0 +1,2210 @@
+{
+ "tools": [
+  {
+   "name": "check_connection",
+   "description": "Check if the IDA plugin is running",
+   "inputSchema": {
+    "properties": {},
+    "title": "check_connectionArguments",
+    "type": "object"
+   },
+   "outputSchema": {
+    "properties": {
+     "result": {
+      "title": "Result",
+      "type": "string"
+     }
+    },
+    "required": [
+     "result"
+    ],
+    "title": "check_connectionOutput",
+    "type": "object"
+   }
+  },
+  {
+   "name": "get_metadata",
+   "description": "Get metadata about the current IDB",
+   "inputSchema": {
+    "properties": {},
+    "title": "get_metadataArguments",
+    "type": "object"
+   },
+   "outputSchema": {
+    "properties": {
+     "path": {
+      "title": "Path",
+      "type": "string"
+     },
+     "module": {
+      "title": "Module",
+      "type": "string"
+     },
+     "base": {
+      "title": "Base",
+      "type": "string"
+     },
+     "size": {
+      "title": "Size",
+      "type": "string"
+     },
+     "md5": {
+      "title": "Md5",
+      "type": "string"
+     },
+     "sha256": {
+      "title": "Sha256",
+      "type": "string"
+     },
+     "crc32": {
+      "title": "Crc32",
+      "type": "string"
+     },
+     "filesize": {
+      "title": "Filesize",
+      "type": "string"
+     }
+    },
+    "required": [
+     "path",
+     "module",
+     "base",
+     "size",
+     "md5",
+     "sha256",
+     "crc32",
+     "filesize"
+    ],
+    "title": "Metadata",
+    "type": "object"
+   }
+  },
+  {
+   "name": "get_function_by_name",
+   "description": "Get a function by its name",
+   "inputSchema": {
+    "properties": {
+     "name": {
+      "description": "Name of the function to get",
+      "title": "Name",
+      "type": "string"
+     }
+    },
+    "required": [
+     "name"
+    ],
+    "title": "get_function_by_nameArguments",
+    "type": "object"
+   },
+   "outputSchema": {
+    "properties": {
+     "address": {
+      "title": "Address",
+      "type": "string"
+     },
+     "name": {
+      "title": "Name",
+      "type": "string"
+     },
+     "size": {
+      "title": "Size",
+      "type": "string"
+     }
+    },
+    "required": [
+     "address",
+     "name",
+     "size"
+    ],
+    "title": "Function",
+    "type": "object"
+   }
+  },
+  {
+   "name": "get_function_by_address",
+   "description": "Get a function by its address",
+   "inputSchema": {
+    "properties": {
+     "address": {
+      "description": "Address of the function to get",
+      "title": "Address",
+      "type": "string"
+     }
+    },
+    "required": [
+     "address"
+    ],
+    "title": "get_function_by_addressArguments",
+    "type": "object"
+   },
+   "outputSchema": {
+    "properties": {
+     "address": {
+      "title": "Address",
+      "type": "string"
+     },
+     "name": {
+      "title": "Name",
+      "type": "string"
+     },
+     "size": {
+      "title": "Size",
+      "type": "string"
+     }
+    },
+    "required": [
+     "address",
+     "name",
+     "size"
+    ],
+    "title": "Function",
+    "type": "object"
+   }
+  },
+  {
+   "name": "get_current_address",
+   "description": "Get the address currently selected by the user",
+   "inputSchema": {
+    "properties": {},
+    "title": "get_current_addressArguments",
+    "type": "object"
+   },
+   "outputSchema": {
+    "properties": {
+     "result": {
+      "title": "Result",
+      "type": "string"
+     }
+    },
+    "required": [
+     "result"
+    ],
+    "title": "get_current_addressOutput",
+    "type": "object"
+   }
+  },
+  {
+   "name": "get_current_function",
+   "description": "Get the function currently selected by the user",
+   "inputSchema": {
+    "properties": {},
+    "title": "get_current_functionArguments",
+    "type": "object"
+   },
+   "outputSchema": {
+    "$defs": {
+     "Function": {
+      "properties": {
+       "address": {
+        "title": "Address",
+        "type": "string"
+       },
+       "name": {
+        "title": "Name",
+        "type": "string"
+       },
+       "size": {
+        "title": "Size",
+        "type": "string"
+       }
+      },
+      "required": [
+       "address",
+       "name",
+       "size"
+      ],
+      "title": "Function",
+      "type": "object"
+     }
+    },
+    "properties": {
+     "result": {
+      "anyOf": [
+       {
+        "$ref": "#/$defs/Function"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     }
+    },
+    "required": [
+     "result"
+    ],
+    "title": "get_current_functionOutput",
+    "type": "object"
+   }
+  },
+  {
+   "name": "convert_number",
+   "description": "Convert a number (decimal, hexadecimal) to different representations",
+   "inputSchema": {
+    "properties": {
+     "text": {
+      "description": "Textual representation of the number to convert",
+      "title": "Text",
+      "type": "string"
+     },
+     "size": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Size of the variable in bytes",
+      "title": "Size"
+     }
+    },
+    "required": [
+     "text",
+     "size"
+    ],
+    "title": "convert_numberArguments",
+    "type": "object"
+   },
+   "outputSchema": {
+    "properties": {
+     "decimal": {
+      "title": "Decimal",
+      "type": "string"
+     },
+     "hexadecimal": {
+      "title": "Hexadecimal",
+      "type": "string"
+     },
+     "bytes": {
+      "title": "Bytes",
+      "type": "string"
+     },
+     "ascii": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Ascii"
+     },
+     "binary": {
+      "title": "Binary",
+      "type": "string"
+     }
+    },
+    "required": [
+     "decimal",
+     "hexadecimal",
+     "bytes",
+     "ascii",
+     "binary"
+    ],
+    "title": "ConvertedNumber",
+    "type": "object"
+   }
+  },
+  {
+   "name": "list_functions",
+   "description": "List all functions in the database (paginated)",
+   "inputSchema": {
+    "properties": {
+     "offset": {
+      "description": "Offset to start listing from (start at 0)",
+      "title": "Offset",
+      "type": "integer"
+     },
+     "count": {
+      "description": "Number of functions to list (100 is a good default, 0 means remainder)",
+      "title": "Count",
+      "type": "integer"
+     }
+    },
+    "required": [
+     "offset",
+     "count"
+    ],
+    "title": "list_functionsArguments",
+    "type": "object"
+   },
+   "outputSchema": {
+    "$defs": {
+     "Function": {
+      "properties": {
+       "address": {
+        "title": "Address",
+        "type": "string"
+       },
+       "name": {
+        "title": "Name",
+        "type": "string"
+       },
+       "size": {
+        "title": "Size",
+        "type": "string"
+       }
+      },
+      "required": [
+       "address",
+       "name",
+       "size"
+      ],
+      "title": "Function",
+      "type": "object"
+     },
+     "Page_Function_": {
+      "properties": {
+       "data": {
+        "items": {
+         "$ref": "#/$defs/Function"
+        },
+        "title": "Data",
+        "type": "array"
+       },
+       "next_offset": {
+        "anyOf": [
+         {
+          "type": "integer"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "title": "Next Offset"
+       }
+      },
+      "required": [
+       "data",
+       "next_offset"
+      ],
+      "title": "Page",
+      "type": "object"
+     }
+    },
+    "properties": {
+     "result": {
+      "$ref": "#/$defs/Page_Function_"
+     }
+    },
+    "required": [
+     "result"
+    ],
+    "title": "list_functionsOutput",
+    "type": "object"
+   }
+  },
+  {
+   "name": "list_globals_filter",
+   "description": "List matching globals in the database (paginated, filtered)",
+   "inputSchema": {
+    "properties": {
+     "offset": {
+      "description": "Offset to start listing from (start at 0)",
+      "title": "Offset",
+      "type": "integer"
+     },
+     "count": {
+      "description": "Number of globals to list (100 is a good default, 0 means remainder)",
+      "title": "Count",
+      "type": "integer"
+     },
+     "filter": {
+      "description": "Filter to apply to the list (required parameter, empty string for no filter). Case-insensitive contains or /regex/ syntax",
+      "title": "Filter",
+      "type": "string"
+     }
+    },
+    "required": [
+     "offset",
+     "count",
+     "filter"
+    ],
+    "title": "list_globals_filterArguments",
+    "type": "object"
+   },
+   "outputSchema": {
+    "$defs": {
+     "Global": {
+      "properties": {
+       "address": {
+        "title": "Address",
+        "type": "string"
+       },
+       "name": {
+        "title": "Name",
+        "type": "string"
+       }
+      },
+      "required": [
+       "address",
+       "name"
+      ],
+      "title": "Global",
+      "type": "object"
+     },
+     "Page_Global_": {
+      "properties": {
+       "data": {
+        "items": {
+         "$ref": "#/$defs/Global"
+        },
+        "title": "Data",
+        "type": "array"
+       },
+       "next_offset": {
+        "anyOf": [
+         {
+          "type": "integer"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "title": "Next Offset"
+       }
+      },
+      "required": [
+       "data",
+       "next_offset"
+      ],
+      "title": "Page",
+      "type": "object"
+     }
+    },
+    "properties": {
+     "result": {
+      "$ref": "#/$defs/Page_Global_"
+     }
+    },
+    "required": [
+     "result"
+    ],
+    "title": "list_globals_filterOutput",
+    "type": "object"
+   }
+  },
+  {
+   "name": "list_globals",
+   "description": "List all globals in the database (paginated)",
+   "inputSchema": {
+    "properties": {
+     "offset": {
+      "description": "Offset to start listing from (start at 0)",
+      "title": "Offset",
+      "type": "integer"
+     },
+     "count": {
+      "description": "Number of globals to list (100 is a good default, 0 means remainder)",
+      "title": "Count",
+      "type": "integer"
+     }
+    },
+    "required": [
+     "offset",
+     "count"
+    ],
+    "title": "list_globalsArguments",
+    "type": "object"
+   },
+   "outputSchema": {
+    "$defs": {
+     "Global": {
+      "properties": {
+       "address": {
+        "title": "Address",
+        "type": "string"
+       },
+       "name": {
+        "title": "Name",
+        "type": "string"
+       }
+      },
+      "required": [
+       "address",
+       "name"
+      ],
+      "title": "Global",
+      "type": "object"
+     },
+     "Page_Global_": {
+      "properties": {
+       "data": {
+        "items": {
+         "$ref": "#/$defs/Global"
+        },
+        "title": "Data",
+        "type": "array"
+       },
+       "next_offset": {
+        "anyOf": [
+         {
+          "type": "integer"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "title": "Next Offset"
+       }
+      },
+      "required": [
+       "data",
+       "next_offset"
+      ],
+      "title": "Page",
+      "type": "object"
+     }
+    },
+    "properties": {
+     "result": {
+      "$ref": "#/$defs/Page_Global_"
+     }
+    },
+    "required": [
+     "result"
+    ],
+    "title": "list_globalsOutput",
+    "type": "object"
+   }
+  },
+  {
+   "name": "list_imports",
+   "description": " List all imported symbols with their name and module (paginated) ",
+   "inputSchema": {
+    "properties": {
+     "offset": {
+      "description": "Offset to start listing from (start at 0)",
+      "title": "Offset",
+      "type": "integer"
+     },
+     "count": {
+      "description": "Number of imports to list (100 is a good default, 0 means remainder)",
+      "title": "Count",
+      "type": "integer"
+     }
+    },
+    "required": [
+     "offset",
+     "count"
+    ],
+    "title": "list_importsArguments",
+    "type": "object"
+   },
+   "outputSchema": {
+    "$defs": {
+     "Import": {
+      "properties": {
+       "address": {
+        "title": "Address",
+        "type": "string"
+       },
+       "imported_name": {
+        "title": "Imported Name",
+        "type": "string"
+       },
+       "module": {
+        "title": "Module",
+        "type": "string"
+       }
+      },
+      "required": [
+       "address",
+       "imported_name",
+       "module"
+      ],
+      "title": "Import",
+      "type": "object"
+     },
+     "Page_Import_": {
+      "properties": {
+       "data": {
+        "items": {
+         "$ref": "#/$defs/Import"
+        },
+        "title": "Data",
+        "type": "array"
+       },
+       "next_offset": {
+        "anyOf": [
+         {
+          "type": "integer"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "title": "Next Offset"
+       }
+      },
+      "required": [
+       "data",
+       "next_offset"
+      ],
+      "title": "Page",
+      "type": "object"
+     }
+    },
+    "properties": {
+     "result": {
+      "$ref": "#/$defs/Page_Import_"
+     }
+    },
+    "required": [
+     "result"
+    ],
+    "title": "list_importsOutput",
+    "type": "object"
+   }
+  },
+  {
+   "name": "list_strings_filter",
+   "description": "List matching strings in the database (paginated, filtered)",
+   "inputSchema": {
+    "properties": {
+     "offset": {
+      "description": "Offset to start listing from (start at 0)",
+      "title": "Offset",
+      "type": "integer"
+     },
+     "count": {
+      "description": "Number of strings to list (100 is a good default, 0 means remainder)",
+      "title": "Count",
+      "type": "integer"
+     },
+     "filter": {
+      "description": "Filter to apply to the list (required parameter, empty string for no filter). Case-insensitive contains or /regex/ syntax",
+      "title": "Filter",
+      "type": "string"
+     }
+    },
+    "required": [
+     "offset",
+     "count",
+     "filter"
+    ],
+    "title": "list_strings_filterArguments",
+    "type": "object"
+   },
+   "outputSchema": {
+    "$defs": {
+     "Page_String_": {
+      "properties": {
+       "data": {
+        "items": {
+         "$ref": "#/$defs/String"
+        },
+        "title": "Data",
+        "type": "array"
+       },
+       "next_offset": {
+        "anyOf": [
+         {
+          "type": "integer"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "title": "Next Offset"
+       }
+      },
+      "required": [
+       "data",
+       "next_offset"
+      ],
+      "title": "Page",
+      "type": "object"
+     },
+     "String": {
+      "properties": {
+       "address": {
+        "title": "Address",
+        "type": "string"
+       },
+       "length": {
+        "title": "Length",
+        "type": "integer"
+       },
+       "string": {
+        "title": "String",
+        "type": "string"
+       }
+      },
+      "required": [
+       "address",
+       "length",
+       "string"
+      ],
+      "title": "String",
+      "type": "object"
+     }
+    },
+    "properties": {
+     "result": {
+      "$ref": "#/$defs/Page_String_"
+     }
+    },
+    "required": [
+     "result"
+    ],
+    "title": "list_strings_filterOutput",
+    "type": "object"
+   }
+  },
+  {
+   "name": "list_strings",
+   "description": "List all strings in the database (paginated)",
+   "inputSchema": {
+    "properties": {
+     "offset": {
+      "description": "Offset to start listing from (start at 0)",
+      "title": "Offset",
+      "type": "integer"
+     },
+     "count": {
+      "description": "Number of strings to list (100 is a good default, 0 means remainder)",
+      "title": "Count",
+      "type": "integer"
+     }
+    },
+    "required": [
+     "offset",
+     "count"
+    ],
+    "title": "list_stringsArguments",
+    "type": "object"
+   },
+   "outputSchema": {
+    "$defs": {
+     "Page_String_": {
+      "properties": {
+       "data": {
+        "items": {
+         "$ref": "#/$defs/String"
+        },
+        "title": "Data",
+        "type": "array"
+       },
+       "next_offset": {
+        "anyOf": [
+         {
+          "type": "integer"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "title": "Next Offset"
+       }
+      },
+      "required": [
+       "data",
+       "next_offset"
+      ],
+      "title": "Page",
+      "type": "object"
+     },
+     "String": {
+      "properties": {
+       "address": {
+        "title": "Address",
+        "type": "string"
+       },
+       "length": {
+        "title": "Length",
+        "type": "integer"
+       },
+       "string": {
+        "title": "String",
+        "type": "string"
+       }
+      },
+      "required": [
+       "address",
+       "length",
+       "string"
+      ],
+      "title": "String",
+      "type": "object"
+     }
+    },
+    "properties": {
+     "result": {
+      "$ref": "#/$defs/Page_String_"
+     }
+    },
+    "required": [
+     "result"
+    ],
+    "title": "list_stringsOutput",
+    "type": "object"
+   }
+  },
+  {
+   "name": "list_local_types",
+   "description": "List all Local types in the database",
+   "inputSchema": {
+    "properties": {},
+    "title": "list_local_typesArguments",
+    "type": "object"
+   }
+  },
+  {
+   "name": "decompile_function",
+   "description": "Decompile a function at the given address",
+   "inputSchema": {
+    "properties": {
+     "address": {
+      "description": "Address of the function to decompile",
+      "title": "Address",
+      "type": "string"
+     }
+    },
+    "required": [
+     "address"
+    ],
+    "title": "decompile_functionArguments",
+    "type": "object"
+   },
+   "outputSchema": {
+    "properties": {
+     "result": {
+      "title": "Result",
+      "type": "string"
+     }
+    },
+    "required": [
+     "result"
+    ],
+    "title": "decompile_functionOutput",
+    "type": "object"
+   }
+  },
+  {
+   "name": "disassemble_function",
+   "description": "Get assembly code for a function (API-compatible with older IDA builds)",
+   "inputSchema": {
+    "properties": {
+     "start_address": {
+      "description": "Address of the function to disassemble",
+      "title": "Start Address",
+      "type": "string"
+     }
+    },
+    "required": [
+     "start_address"
+    ],
+    "title": "disassemble_functionArguments",
+    "type": "object"
+   },
+   "outputSchema": {
+    "$defs": {
+     "Argument": {
+      "properties": {
+       "name": {
+        "title": "Name",
+        "type": "string"
+       },
+       "type": {
+        "title": "Type",
+        "type": "string"
+       }
+      },
+      "required": [
+       "name",
+       "type"
+      ],
+      "title": "Argument",
+      "type": "object"
+     },
+     "DisassemblyLine": {
+      "properties": {
+       "segment": {
+        "title": "Segment",
+        "type": "string"
+       },
+       "address": {
+        "title": "Address",
+        "type": "string"
+       },
+       "label": {
+        "title": "Label",
+        "type": "string"
+       },
+       "instruction": {
+        "title": "Instruction",
+        "type": "string"
+       },
+       "comments": {
+        "items": {
+         "type": "string"
+        },
+        "title": "Comments",
+        "type": "array"
+       }
+      },
+      "required": [
+       "address",
+       "instruction"
+      ],
+      "title": "DisassemblyLine",
+      "type": "object"
+     },
+     "StackFrameVariable": {
+      "properties": {
+       "name": {
+        "title": "Name",
+        "type": "string"
+       },
+       "offset": {
+        "title": "Offset",
+        "type": "string"
+       },
+       "size": {
+        "title": "Size",
+        "type": "string"
+       },
+       "type": {
+        "title": "Type",
+        "type": "string"
+       }
+      },
+      "required": [
+       "name",
+       "offset",
+       "size",
+       "type"
+      ],
+      "title": "StackFrameVariable",
+      "type": "object"
+     }
+    },
+    "properties": {
+     "name": {
+      "title": "Name",
+      "type": "string"
+     },
+     "start_ea": {
+      "title": "Start Ea",
+      "type": "string"
+     },
+     "return_type": {
+      "default": null,
+      "title": "Return Type",
+      "type": "string"
+     },
+     "arguments": {
+      "default": null,
+      "items": {
+       "$ref": "#/$defs/Argument"
+      },
+      "title": "Arguments",
+      "type": "array"
+     },
+     "stack_frame": {
+      "items": {
+       "$ref": "#/$defs/StackFrameVariable"
+      },
+      "title": "Stack Frame",
+      "type": "array"
+     },
+     "lines": {
+      "items": {
+       "$ref": "#/$defs/DisassemblyLine"
+      },
+      "title": "Lines",
+      "type": "array"
+     }
+    },
+    "required": [
+     "name",
+     "start_ea",
+     "stack_frame",
+     "lines"
+    ],
+    "title": "DisassemblyFunction",
+    "type": "object"
+   }
+  },
+  {
+   "name": "get_xrefs_to",
+   "description": "Get all cross references to the given address",
+   "inputSchema": {
+    "properties": {
+     "address": {
+      "description": "Address to get cross references to",
+      "title": "Address",
+      "type": "string"
+     }
+    },
+    "required": [
+     "address"
+    ],
+    "title": "get_xrefs_toArguments",
+    "type": "object"
+   },
+   "outputSchema": {
+    "$defs": {
+     "Function": {
+      "properties": {
+       "address": {
+        "title": "Address",
+        "type": "string"
+       },
+       "name": {
+        "title": "Name",
+        "type": "string"
+       },
+       "size": {
+        "title": "Size",
+        "type": "string"
+       }
+      },
+      "required": [
+       "address",
+       "name",
+       "size"
+      ],
+      "title": "Function",
+      "type": "object"
+     },
+     "Xref": {
+      "properties": {
+       "address": {
+        "title": "Address",
+        "type": "string"
+       },
+       "type": {
+        "title": "Type",
+        "type": "string"
+       },
+       "function": {
+        "anyOf": [
+         {
+          "$ref": "#/$defs/Function"
+         },
+         {
+          "type": "null"
+         }
+        ]
+       }
+      },
+      "required": [
+       "address",
+       "type",
+       "function"
+      ],
+      "title": "Xref",
+      "type": "object"
+     }
+    },
+    "properties": {
+     "result": {
+      "items": {
+       "$ref": "#/$defs/Xref"
+      },
+      "title": "Result",
+      "type": "array"
+     }
+    },
+    "required": [
+     "result"
+    ],
+    "title": "get_xrefs_toOutput",
+    "type": "object"
+   }
+  },
+  {
+   "name": "get_xrefs_to_field",
+   "description": "Get all cross references to a named struct field (member)",
+   "inputSchema": {
+    "properties": {
+     "struct_name": {
+      "description": "Name of the struct (type) containing the field",
+      "title": "Struct Name",
+      "type": "string"
+     },
+     "field_name": {
+      "description": "Name of the field (member) to get xrefs to",
+      "title": "Field Name",
+      "type": "string"
+     }
+    },
+    "required": [
+     "struct_name",
+     "field_name"
+    ],
+    "title": "get_xrefs_to_fieldArguments",
+    "type": "object"
+   },
+   "outputSchema": {
+    "$defs": {
+     "Function": {
+      "properties": {
+       "address": {
+        "title": "Address",
+        "type": "string"
+       },
+       "name": {
+        "title": "Name",
+        "type": "string"
+       },
+       "size": {
+        "title": "Size",
+        "type": "string"
+       }
+      },
+      "required": [
+       "address",
+       "name",
+       "size"
+      ],
+      "title": "Function",
+      "type": "object"
+     },
+     "Xref": {
+      "properties": {
+       "address": {
+        "title": "Address",
+        "type": "string"
+       },
+       "type": {
+        "title": "Type",
+        "type": "string"
+       },
+       "function": {
+        "anyOf": [
+         {
+          "$ref": "#/$defs/Function"
+         },
+         {
+          "type": "null"
+         }
+        ]
+       }
+      },
+      "required": [
+       "address",
+       "type",
+       "function"
+      ],
+      "title": "Xref",
+      "type": "object"
+     }
+    },
+    "properties": {
+     "result": {
+      "items": {
+       "$ref": "#/$defs/Xref"
+      },
+      "title": "Result",
+      "type": "array"
+     }
+    },
+    "required": [
+     "result"
+    ],
+    "title": "get_xrefs_to_fieldOutput",
+    "type": "object"
+   }
+  },
+  {
+   "name": "get_callees",
+   "description": "Get all the functions called (callees) by the function at function_address",
+   "inputSchema": {
+    "properties": {
+     "function_address": {
+      "description": "Address of the function to get callee functions",
+      "title": "Function Address",
+      "type": "string"
+     }
+    },
+    "required": [
+     "function_address"
+    ],
+    "title": "get_calleesArguments",
+    "type": "object"
+   },
+   "outputSchema": {
+    "properties": {
+     "result": {
+      "items": {
+       "additionalProperties": {
+        "type": "string"
+       },
+       "type": "object"
+      },
+      "title": "Result",
+      "type": "array"
+     }
+    },
+    "required": [
+     "result"
+    ],
+    "title": "get_calleesOutput",
+    "type": "object"
+   }
+  },
+  {
+   "name": "get_callers",
+   "description": "Get all callers of the given address",
+   "inputSchema": {
+    "properties": {
+     "function_address": {
+      "description": "Address of the function to get callers",
+      "title": "Function Address",
+      "type": "string"
+     }
+    },
+    "required": [
+     "function_address"
+    ],
+    "title": "get_callersArguments",
+    "type": "object"
+   },
+   "outputSchema": {
+    "$defs": {
+     "Function": {
+      "properties": {
+       "address": {
+        "title": "Address",
+        "type": "string"
+       },
+       "name": {
+        "title": "Name",
+        "type": "string"
+       },
+       "size": {
+        "title": "Size",
+        "type": "string"
+       }
+      },
+      "required": [
+       "address",
+       "name",
+       "size"
+      ],
+      "title": "Function",
+      "type": "object"
+     }
+    },
+    "properties": {
+     "result": {
+      "items": {
+       "$ref": "#/$defs/Function"
+      },
+      "title": "Result",
+      "type": "array"
+     }
+    },
+    "required": [
+     "result"
+    ],
+    "title": "get_callersOutput",
+    "type": "object"
+   }
+  },
+  {
+   "name": "get_entry_points",
+   "description": "Get all entry points in the database",
+   "inputSchema": {
+    "properties": {},
+    "title": "get_entry_pointsArguments",
+    "type": "object"
+   },
+   "outputSchema": {
+    "$defs": {
+     "Function": {
+      "properties": {
+       "address": {
+        "title": "Address",
+        "type": "string"
+       },
+       "name": {
+        "title": "Name",
+        "type": "string"
+       },
+       "size": {
+        "title": "Size",
+        "type": "string"
+       }
+      },
+      "required": [
+       "address",
+       "name",
+       "size"
+      ],
+      "title": "Function",
+      "type": "object"
+     }
+    },
+    "properties": {
+     "result": {
+      "items": {
+       "$ref": "#/$defs/Function"
+      },
+      "title": "Result",
+      "type": "array"
+     }
+    },
+    "required": [
+     "result"
+    ],
+    "title": "get_entry_pointsOutput",
+    "type": "object"
+   }
+  },
+  {
+   "name": "set_comment",
+   "description": "Set a comment for a given address in the function disassembly and pseudocode",
+   "inputSchema": {
+    "properties": {
+     "address": {
+      "description": "Address in the function to set the comment for",
+      "title": "Address",
+      "type": "string"
+     },
+     "comment": {
+      "description": "Comment text",
+      "title": "Comment",
+      "type": "string"
+     }
+    },
+    "required": [
+     "address",
+     "comment"
+    ],
+    "title": "set_commentArguments",
+    "type": "object"
+   }
+  },
+  {
+   "name": "rename_local_variable",
+   "description": "Rename a local variable in a function",
+   "inputSchema": {
+    "properties": {
+     "function_address": {
+      "description": "Address of the function containing the variable",
+      "title": "Function Address",
+      "type": "string"
+     },
+     "old_name": {
+      "description": "Current name of the variable",
+      "title": "Old Name",
+      "type": "string"
+     },
+     "new_name": {
+      "description": "New name for the variable (empty for a default name)",
+      "title": "New Name",
+      "type": "string"
+     }
+    },
+    "required": [
+     "function_address",
+     "old_name",
+     "new_name"
+    ],
+    "title": "rename_local_variableArguments",
+    "type": "object"
+   }
+  },
+  {
+   "name": "rename_global_variable",
+   "description": "Rename a global variable",
+   "inputSchema": {
+    "properties": {
+     "old_name": {
+      "description": "Current name of the global variable",
+      "title": "Old Name",
+      "type": "string"
+     },
+     "new_name": {
+      "description": "New name for the global variable (empty for a default name)",
+      "title": "New Name",
+      "type": "string"
+     }
+    },
+    "required": [
+     "old_name",
+     "new_name"
+    ],
+    "title": "rename_global_variableArguments",
+    "type": "object"
+   }
+  },
+  {
+   "name": "set_global_variable_type",
+   "description": "Set a global variable's type",
+   "inputSchema": {
+    "properties": {
+     "variable_name": {
+      "description": "Name of the global variable",
+      "title": "Variable Name",
+      "type": "string"
+     },
+     "new_type": {
+      "description": "New type for the variable",
+      "title": "New Type",
+      "type": "string"
+     }
+    },
+    "required": [
+     "variable_name",
+     "new_type"
+    ],
+    "title": "set_global_variable_typeArguments",
+    "type": "object"
+   }
+  },
+  {
+   "name": "patch_address_assembles",
+   "description": "",
+   "inputSchema": {
+    "properties": {
+     "address": {
+      "description": "Starting Address to apply patch",
+      "title": "Address",
+      "type": "string"
+     },
+     "instructions": {
+      "description": "Assembly instructions separated by ';'",
+      "title": "Instructions",
+      "type": "string"
+     }
+    },
+    "required": [
+     "address",
+     "instructions"
+    ],
+    "title": "patch_address_assemblesArguments",
+    "type": "object"
+   },
+   "outputSchema": {
+    "properties": {
+     "result": {
+      "title": "Result",
+      "type": "string"
+     }
+    },
+    "required": [
+     "result"
+    ],
+    "title": "patch_address_assemblesOutput",
+    "type": "object"
+   }
+  },
+  {
+   "name": "get_global_variable_value_by_name",
+   "description": "\n    Read a global variable's value (if known at compile-time)\n\n    Prefer this function over the `data_read_*` functions.\n    ",
+   "inputSchema": {
+    "properties": {
+     "variable_name": {
+      "description": "Name of the global variable",
+      "title": "Variable Name",
+      "type": "string"
+     }
+    },
+    "required": [
+     "variable_name"
+    ],
+    "title": "get_global_variable_value_by_nameArguments",
+    "type": "object"
+   },
+   "outputSchema": {
+    "properties": {
+     "result": {
+      "title": "Result",
+      "type": "string"
+     }
+    },
+    "required": [
+     "result"
+    ],
+    "title": "get_global_variable_value_by_nameOutput",
+    "type": "object"
+   }
+  },
+  {
+   "name": "get_global_variable_value_at_address",
+   "description": "\n    Read a global variable's value by its address (if known at compile-time)\n\n    Prefer this function over the `data_read_*` functions.\n    ",
+   "inputSchema": {
+    "properties": {
+     "address": {
+      "description": "Address of the global variable",
+      "title": "Address",
+      "type": "string"
+     }
+    },
+    "required": [
+     "address"
+    ],
+    "title": "get_global_variable_value_at_addressArguments",
+    "type": "object"
+   },
+   "outputSchema": {
+    "properties": {
+     "result": {
+      "title": "Result",
+      "type": "string"
+     }
+    },
+    "required": [
+     "result"
+    ],
+    "title": "get_global_variable_value_at_addressOutput",
+    "type": "object"
+   }
+  },
+  {
+   "name": "rename_function",
+   "description": "Rename a function",
+   "inputSchema": {
+    "properties": {
+     "function_address": {
+      "description": "Address of the function to rename",
+      "title": "Function Address",
+      "type": "string"
+     },
+     "new_name": {
+      "description": "New name for the function (empty for a default name)",
+      "title": "New Name",
+      "type": "string"
+     }
+    },
+    "required": [
+     "function_address",
+     "new_name"
+    ],
+    "title": "rename_functionArguments",
+    "type": "object"
+   }
+  },
+  {
+   "name": "set_function_prototype",
+   "description": "Set a function's prototype",
+   "inputSchema": {
+    "properties": {
+     "function_address": {
+      "description": "Address of the function",
+      "title": "Function Address",
+      "type": "string"
+     },
+     "prototype": {
+      "description": "New function prototype",
+      "title": "Prototype",
+      "type": "string"
+     }
+    },
+    "required": [
+     "function_address",
+     "prototype"
+    ],
+    "title": "set_function_prototypeArguments",
+    "type": "object"
+   }
+  },
+  {
+   "name": "declare_c_type",
+   "description": "Create or update a local type from a C declaration",
+   "inputSchema": {
+    "properties": {
+     "c_declaration": {
+      "description": "C declaration of the type. Examples include: typedef int foo_t; struct bar { int a; bool b; };",
+      "title": "C Declaration",
+      "type": "string"
+     }
+    },
+    "required": [
+     "c_declaration"
+    ],
+    "title": "declare_c_typeArguments",
+    "type": "object"
+   }
+  },
+  {
+   "name": "set_local_variable_type",
+   "description": "Set a local variable's type",
+   "inputSchema": {
+    "properties": {
+     "function_address": {
+      "description": "Address of the decompiled function containing the variable",
+      "title": "Function Address",
+      "type": "string"
+     },
+     "variable_name": {
+      "description": "Name of the variable",
+      "title": "Variable Name",
+      "type": "string"
+     },
+     "new_type": {
+      "description": "New type for the variable",
+      "title": "New Type",
+      "type": "string"
+     }
+    },
+    "required": [
+     "function_address",
+     "variable_name",
+     "new_type"
+    ],
+    "title": "set_local_variable_typeArguments",
+    "type": "object"
+   }
+  },
+  {
+   "name": "get_stack_frame_variables",
+   "description": " Retrieve the stack frame variables for a given function ",
+   "inputSchema": {
+    "properties": {
+     "function_address": {
+      "description": "Address of the disassembled function to retrieve the stack frame variables",
+      "title": "Function Address",
+      "type": "string"
+     }
+    },
+    "required": [
+     "function_address"
+    ],
+    "title": "get_stack_frame_variablesArguments",
+    "type": "object"
+   },
+   "outputSchema": {
+    "$defs": {
+     "StackFrameVariable": {
+      "properties": {
+       "name": {
+        "title": "Name",
+        "type": "string"
+       },
+       "offset": {
+        "title": "Offset",
+        "type": "string"
+       },
+       "size": {
+        "title": "Size",
+        "type": "string"
+       },
+       "type": {
+        "title": "Type",
+        "type": "string"
+       }
+      },
+      "required": [
+       "name",
+       "offset",
+       "size",
+       "type"
+      ],
+      "title": "StackFrameVariable",
+      "type": "object"
+     }
+    },
+    "properties": {
+     "result": {
+      "items": {
+       "$ref": "#/$defs/StackFrameVariable"
+      },
+      "title": "Result",
+      "type": "array"
+     }
+    },
+    "required": [
+     "result"
+    ],
+    "title": "get_stack_frame_variablesOutput",
+    "type": "object"
+   }
+  },
+  {
+   "name": "get_defined_structures",
+   "description": " Returns a list of all defined structures ",
+   "inputSchema": {
+    "properties": {},
+    "title": "get_defined_structuresArguments",
+    "type": "object"
+   },
+   "outputSchema": {
+    "$defs": {
+     "StructureDefinition": {
+      "properties": {
+       "name": {
+        "title": "Name",
+        "type": "string"
+       },
+       "size": {
+        "title": "Size",
+        "type": "string"
+       },
+       "members": {
+        "items": {
+         "$ref": "#/$defs/StructureMember"
+        },
+        "title": "Members",
+        "type": "array"
+       }
+      },
+      "required": [
+       "name",
+       "size",
+       "members"
+      ],
+      "title": "StructureDefinition",
+      "type": "object"
+     },
+     "StructureMember": {
+      "properties": {
+       "name": {
+        "title": "Name",
+        "type": "string"
+       },
+       "offset": {
+        "title": "Offset",
+        "type": "string"
+       },
+       "size": {
+        "title": "Size",
+        "type": "string"
+       },
+       "type": {
+        "title": "Type",
+        "type": "string"
+       }
+      },
+      "required": [
+       "name",
+       "offset",
+       "size",
+       "type"
+      ],
+      "title": "StructureMember",
+      "type": "object"
+     }
+    },
+    "properties": {
+     "result": {
+      "items": {
+       "$ref": "#/$defs/StructureDefinition"
+      },
+      "title": "Result",
+      "type": "array"
+     }
+    },
+    "required": [
+     "result"
+    ],
+    "title": "get_defined_structuresOutput",
+    "type": "object"
+   }
+  },
+  {
+   "name": "analyze_struct_detailed",
+   "description": "Detailed analysis of a structure with all fields",
+   "inputSchema": {
+    "properties": {
+     "name": {
+      "description": "Name of the structure to analyze",
+      "title": "Name",
+      "type": "string"
+     }
+    },
+    "required": [
+     "name"
+    ],
+    "title": "analyze_struct_detailedArguments",
+    "type": "object"
+   }
+  },
+  {
+   "name": "get_struct_at_address",
+   "description": "Get structure field values at a specific address",
+   "inputSchema": {
+    "properties": {
+     "address": {
+      "description": "Address to analyze structure at",
+      "title": "Address",
+      "type": "string"
+     },
+     "struct_name": {
+      "description": "Name of the structure",
+      "title": "Struct Name",
+      "type": "string"
+     }
+    },
+    "required": [
+     "address",
+     "struct_name"
+    ],
+    "title": "get_struct_at_addressArguments",
+    "type": "object"
+   }
+  },
+  {
+   "name": "get_struct_info_simple",
+   "description": "Simple function to get basic structure information",
+   "inputSchema": {
+    "properties": {
+     "name": {
+      "description": "Name of the structure",
+      "title": "Name",
+      "type": "string"
+     }
+    },
+    "required": [
+     "name"
+    ],
+    "title": "get_struct_info_simpleArguments",
+    "type": "object"
+   }
+  },
+  {
+   "name": "search_structures",
+   "description": "Search for structures by name pattern",
+   "inputSchema": {
+    "properties": {
+     "filter": {
+      "description": "Filter pattern to search for structures (case-insensitive)",
+      "title": "Filter",
+      "type": "string"
+     }
+    },
+    "required": [
+     "filter"
+    ],
+    "title": "search_structuresArguments",
+    "type": "object"
+   },
+   "outputSchema": {
+    "properties": {
+     "result": {
+      "items": {
+       "additionalProperties": true,
+       "type": "object"
+      },
+      "title": "Result",
+      "type": "array"
+     }
+    },
+    "required": [
+     "result"
+    ],
+    "title": "search_structuresOutput",
+    "type": "object"
+   }
+  },
+  {
+   "name": "rename_stack_frame_variable",
+   "description": " Change the name of a stack variable for an IDA function ",
+   "inputSchema": {
+    "properties": {
+     "function_address": {
+      "description": "Address of the disassembled function to set the stack frame variables",
+      "title": "Function Address",
+      "type": "string"
+     },
+     "old_name": {
+      "description": "Current name of the variable",
+      "title": "Old Name",
+      "type": "string"
+     },
+     "new_name": {
+      "description": "New name for the variable (empty for a default name)",
+      "title": "New Name",
+      "type": "string"
+     }
+    },
+    "required": [
+     "function_address",
+     "old_name",
+     "new_name"
+    ],
+    "title": "rename_stack_frame_variableArguments",
+    "type": "object"
+   }
+  },
+  {
+   "name": "create_stack_frame_variable",
+   "description": " For a given function, create a stack variable at an offset and with a specific type ",
+   "inputSchema": {
+    "properties": {
+     "function_address": {
+      "description": "Address of the disassembled function to set the stack frame variables",
+      "title": "Function Address",
+      "type": "string"
+     },
+     "offset": {
+      "description": "Offset of the stack frame variable",
+      "title": "Offset",
+      "type": "string"
+     },
+     "variable_name": {
+      "description": "Name of the stack variable",
+      "title": "Variable Name",
+      "type": "string"
+     },
+     "type_name": {
+      "description": "Type of the stack variable",
+      "title": "Type Name",
+      "type": "string"
+     }
+    },
+    "required": [
+     "function_address",
+     "offset",
+     "variable_name",
+     "type_name"
+    ],
+    "title": "create_stack_frame_variableArguments",
+    "type": "object"
+   }
+  },
+  {
+   "name": "set_stack_frame_variable_type",
+   "description": " For a given disassembled function, set the type of a stack variable ",
+   "inputSchema": {
+    "properties": {
+     "function_address": {
+      "description": "Address of the disassembled function to set the stack frame variables",
+      "title": "Function Address",
+      "type": "string"
+     },
+     "variable_name": {
+      "description": "Name of the stack variable",
+      "title": "Variable Name",
+      "type": "string"
+     },
+     "type_name": {
+      "description": "Type of the stack variable",
+      "title": "Type Name",
+      "type": "string"
+     }
+    },
+    "required": [
+     "function_address",
+     "variable_name",
+     "type_name"
+    ],
+    "title": "set_stack_frame_variable_typeArguments",
+    "type": "object"
+   }
+  },
+  {
+   "name": "delete_stack_frame_variable",
+   "description": " Delete the named stack variable for a given function ",
+   "inputSchema": {
+    "properties": {
+     "function_address": {
+      "description": "Address of the function to set the stack frame variables",
+      "title": "Function Address",
+      "type": "string"
+     },
+     "variable_name": {
+      "description": "Name of the stack variable",
+      "title": "Variable Name",
+      "type": "string"
+     }
+    },
+    "required": [
+     "function_address",
+     "variable_name"
+    ],
+    "title": "delete_stack_frame_variableArguments",
+    "type": "object"
+   }
+  },
+  {
+   "name": "read_memory_bytes",
+   "description": "\n    Read bytes at a given address.\n\n    Only use this function if `get_global_variable_at` and `get_global_variable_by_name`\n    both failed.\n    ",
+   "inputSchema": {
+    "properties": {
+     "memory_address": {
+      "description": "Address of the memory value to be read",
+      "title": "Memory Address",
+      "type": "string"
+     },
+     "size": {
+      "description": "size of memory to read",
+      "title": "Size",
+      "type": "integer"
+     }
+    },
+    "required": [
+     "memory_address",
+     "size"
+    ],
+    "title": "read_memory_bytesArguments",
+    "type": "object"
+   },
+   "outputSchema": {
+    "properties": {
+     "result": {
+      "title": "Result",
+      "type": "string"
+     }
+    },
+    "required": [
+     "result"
+    ],
+    "title": "read_memory_bytesOutput",
+    "type": "object"
+   }
+  },
+  {
+   "name": "data_read_byte",
+   "description": "\n    Read the 1 byte value at the specified address.\n\n    Only use this function if `get_global_variable_at` failed.\n    ",
+   "inputSchema": {
+    "properties": {
+     "address": {
+      "description": "Address to get 1 byte value from",
+      "title": "Address",
+      "type": "string"
+     }
+    },
+    "required": [
+     "address"
+    ],
+    "title": "data_read_byteArguments",
+    "type": "object"
+   },
+   "outputSchema": {
+    "properties": {
+     "result": {
+      "title": "Result",
+      "type": "integer"
+     }
+    },
+    "required": [
+     "result"
+    ],
+    "title": "data_read_byteOutput",
+    "type": "object"
+   }
+  },
+  {
+   "name": "data_read_word",
+   "description": "\n    Read the 2 byte value at the specified address as a WORD.\n\n    Only use this function if `get_global_variable_at` failed.\n    ",
+   "inputSchema": {
+    "properties": {
+     "address": {
+      "description": "Address to get 2 bytes value from",
+      "title": "Address",
+      "type": "string"
+     }
+    },
+    "required": [
+     "address"
+    ],
+    "title": "data_read_wordArguments",
+    "type": "object"
+   },
+   "outputSchema": {
+    "properties": {
+     "result": {
+      "title": "Result",
+      "type": "integer"
+     }
+    },
+    "required": [
+     "result"
+    ],
+    "title": "data_read_wordOutput",
+    "type": "object"
+   }
+  },
+  {
+   "name": "data_read_dword",
+   "description": "\n    Read the 4 byte value at the specified address as a DWORD.\n\n    Only use this function if `get_global_variable_at` failed.\n    ",
+   "inputSchema": {
+    "properties": {
+     "address": {
+      "description": "Address to get 4 bytes value from",
+      "title": "Address",
+      "type": "string"
+     }
+    },
+    "required": [
+     "address"
+    ],
+    "title": "data_read_dwordArguments",
+    "type": "object"
+   },
+   "outputSchema": {
+    "properties": {
+     "result": {
+      "title": "Result",
+      "type": "integer"
+     }
+    },
+    "required": [
+     "result"
+    ],
+    "title": "data_read_dwordOutput",
+    "type": "object"
+   }
+  },
+  {
+   "name": "data_read_qword",
+   "description": "\n    Read the 8 byte value at the specified address as a QWORD.\n\n    Only use this function if `get_global_variable_at` failed.\n    ",
+   "inputSchema": {
+    "properties": {
+     "address": {
+      "description": "Address to get 8 bytes value from",
+      "title": "Address",
+      "type": "string"
+     }
+    },
+    "required": [
+     "address"
+    ],
+    "title": "data_read_qwordArguments",
+    "type": "object"
+   },
+   "outputSchema": {
+    "properties": {
+     "result": {
+      "title": "Result",
+      "type": "integer"
+     }
+    },
+    "required": [
+     "result"
+    ],
+    "title": "data_read_qwordOutput",
+    "type": "object"
+   }
+  },
+  {
+   "name": "data_read_string",
+   "description": "\n    Read the string at the specified address.\n\n    Only use this function if `get_global_variable_at` failed.\n    ",
+   "inputSchema": {
+    "properties": {
+     "address": {
+      "description": "Address to get string from",
+      "title": "Address",
+      "type": "string"
+     }
+    },
+    "required": [
+     "address"
+    ],
+    "title": "data_read_stringArguments",
+    "type": "object"
+   },
+   "outputSchema": {
+    "properties": {
+     "result": {
+      "title": "Result",
+      "type": "string"
+     }
+    },
+    "required": [
+     "result"
+    ],
+    "title": "data_read_stringOutput",
+    "type": "object"
+   }
+  }
+ ]
+}

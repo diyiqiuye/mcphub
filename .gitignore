@@ -1,0 +1,10 @@
+build/
+stage/
+tools/
+state/
+cache/
+dist-pack/
+.workbuddy/
+*.zip
+*.user
+*.log

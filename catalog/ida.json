@@ -1,0 +1,62 @@
+{
+  "id": "ida",
+  "name": "IDA Pro",
+  "category": "decompile",
+  "version": "9.3",
+  "license": "commercial",
+  "sizeMB": 0,
+  "requires": [
+    "jre21"
+  ],
+  "probe": [
+    "tools/ida",
+    "%USERPROFILE%/Desktop/ida/ida93sp2/ida93sp2",
+    "C:/Program Files/IDA Pro 9.3"
+  ],
+  "install": {
+    "type": "manual",
+    "dest": "tools/ida",
+    "note": "商业软件，程序不下载；请把 IDA 便携目录指到 tools/ida 或在设置里登记路径"
+  },
+  "verify": {
+    "cmd": [
+      "{root}/python311/python.exe",
+      "-c",
+      "import ida_pro_mcp, idapro; print('ida ok')"
+    ],
+    "env": {
+      "IDADIR": "{root}"
+    },
+    "match": "ida ok",
+    "timeoutMs": 30000
+  },
+  "mcp": {
+    "mode": "upstream-stdio",
+    "provider": "ida-pro-mcp",
+    "namespace": "ida",
+    "rpcPort": 13337,
+    "timeoutMs": 180000,
+    "command": [
+      "{root}/python311/python.exe",
+      "{root}/python311/Lib/site-packages/ida_pro_mcp/server.py",
+      "--transport",
+      "stdio",
+      "--ida-rpc",
+      "http://127.0.0.1:{rpcPort}"
+    ],
+    "env": {
+      "IDADIR": "{root}",
+      "PYTHONNOUSERSITE": "1"
+    },
+    "headless": {
+      "command": [
+        "{root}/python311/Scripts/idalib-mcp.exe",
+        "{target}",
+        "--port",
+        "{port}"
+      ],
+      "transport": "sse",
+      "note": "无头模式需要 target；网关尚未实现 SSE 客户端，暂用 GUI 插件的 stdio 桥"
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "id": "jadx",
+  "name": "jadx",
+  "category": "decompile",
+  "version": "1.5.6",
+  "license": "Apache-2.0",
+  "sizeMB": 32,
+  "requires": ["jre21"],
+  "probe": ["tools/jadx", "%USERPROFILE%/Desktop/mcp服务/re-hub/tools/jadx"],
+  "install": {
+    "type": "zip",
+    "dest": "tools/jadx",
+    "stripRoot": true,
+    "sources": [
+      { "name": "github",  "url": "https://github.com/skylot/jadx/releases/download/v1.5.6/jadx-1.5.6.zip", "sha256": "" },
+      { "name": "ghproxy", "url": "https://ghproxy.net/https://github.com/skylot/jadx/releases/download/v1.5.6/jadx-1.5.6.zip", "sha256": "" }
+    ]
+  },
+  "verify": { "cmd": ["{root}/bin/jadx.bat", "--version"], "match": "1\\.5\\.6", "timeoutMs": 30000 },
+  "mcp": {
+    "mode": "builtin",
+    "provider": "jadx",
+    "namespace": "jadx",
+    "tools": ["decompile", "search", "get_class", "manifest", "raw"]
+  }
+}

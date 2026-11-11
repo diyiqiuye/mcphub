@@ -1,0 +1,17 @@
+{
+  "schema": 1,
+  "file": "mcphub-pack-20261111.zip",
+  "url": "https://b421151e739e.blob.upstash.io/mcphub-pack-20261111.zip",
+  "bytes": 131457737,
+  "sha256": "439211d60de958af413dbb9b25a3d498f972b0d61da555c2413c1970bbde12ea",
+  "members": {
+    "adb": "platform-tools.zip",
+    "jre21": "jre21.zip",
+    "jadx": "jadx.zip"
+  },
+  "memberSha256": {
+    "adb": "20463a3f3741ede451bf3b81a1f43afa5ccc99ace470b26fed3e80234e3b2dd8",
+    "jre21": "825194f894ec04f1f1dfe017bad4ec327ebb0a091bd9450703577ce4ea6bb5fe",
+    "jadx": "491e2ac56dccac14fd29cf1dadb7a7f6e6efafd71fe5b3e2bf47f91f2dd12e49"
+  }
+}

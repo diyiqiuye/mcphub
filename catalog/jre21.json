@@ -1,0 +1,20 @@
+{
+  "id": "jre21",
+  "name": "JRE 21",
+  "category": "runtime",
+  "version": "21.0.13",
+  "license": "GPL-2.0 WITH Classpath-exception-2.0",
+  "sizeMB": 190,
+  "probe": ["tools/jre", "%USERPROFILE%/Desktop/mcp服务/re-hub/tools/jre"],
+  "install": {
+    "type": "zip",
+    "dest": "tools/jre",
+    "stripRoot": true,
+    "sources": [
+      { "name": "microsoft", "url": "https://aka.ms/download-jdk/microsoft-jdk-21-windows-x64.zip", "sha256": "" },
+      { "name": "azul", "url": "https://cdn.azul.com/zulu/bin/zulu21.44.17-ca-jre21.0.8-win_x64.zip", "sha256": "" }
+    ]
+  },
+  "verify": { "cmd": ["{root}/bin/java.exe", "-version"], "match": "21\\.", "timeoutMs": 20000 },
+  "mcp": { "mode": "dependency", "tools": [] }
+}

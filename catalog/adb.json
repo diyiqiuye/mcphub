@@ -1,0 +1,45 @@
+{
+  "id": "adb",
+  "name": "Android platform-tools",
+  "category": "device",
+  "version": "latest",
+  "license": "Apache-2.0",
+  "sizeMB": 8,
+  "probe": ["tools/platform-tools", "%LOCALAPPDATA%/Android/Sdk/platform-tools", "D:/platform-tools-latest-windows/platform-tools"],
+  "install": {
+    "type": "zip",
+    "dest": "tools/platform-tools",
+    "stripRoot": true,
+    "sources": [
+      { "name": "google", "url": "https://dl.google.com/android/repository/platform-tools-latest-windows.zip", "sha256": "" },
+      { "name": "google-cn", "url": "https://googledownloads.cn/android/repository/platform-tools-latest-windows.zip", "sha256": "" },
+      { "name": "tencent-mirror", "url": "https://mirrors.cloud.tencent.com/AndroidSDK/platform-tools-latest-windows.zip", "sha256": "" }
+    ],
+    "note": "adb + fastboot + 驱动辅助；解压后 tools/platform-tools/{adb.exe,fastboot.exe}"
+  },
+  "verify": { "cmd": ["{root}/adb.exe", "version"], "match": "Android Debug Bridge", "timeoutMs": 20000 },
+  "mcp": {
+    "mode": "builtin",
+    "provider": "adb",
+    "namespace": "adb",
+    "server": { "port": 5037, "autoStart": true, "killOnExit": false },
+    "tools": [
+      "devices",
+      "device_info",
+      "shell",
+      "push",
+      "pull",
+      "install",
+      "uninstall",
+      "packages",
+      "logcat",
+      "screencap",
+      "forward",
+      "reverse",
+      "reboot",
+      "wireless",
+      "fastboot"
+    ],
+    "note": "能力面参考 VioletToolBox 的 ADB 部分：设备识别/无线调试/文件传输/批量装包/应用管理/日志与截图/分区与 fastboot 只读操作"
+  }
+}
